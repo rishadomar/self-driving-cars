@@ -1,0 +1,14 @@
+body {
+    background-color: black;
+    text-align: center;
+}
+h1 {
+    color: white;
+    font-family: verdana;
+    font-size: 300%;
+}
+
+#myCanvas {
+    border: 1px solid #9c9898;
+    background-color: #2a5;
+}
