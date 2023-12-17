@@ -1,8 +1,14 @@
 class GraphEditor {
-    constructor(canvas, graph) {
+    canvas: HTMLCanvasElement;
+    graph: Graph;
+    ctx: CanvasRenderingContext2D;
+    selected: Point | null;
+    hovered: Point | null;
+
+    constructor(canvas: HTMLCanvasElement, graph: Graph) {
         this.canvas = canvas;
         this.graph = graph;
-        this.ctx = this.canvas.getContext('2d');
+        this.ctx = this.canvas.getContext('2d')!;
         this.selected = null;
         this.hovered = null;
 

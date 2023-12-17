@@ -1,14 +1,17 @@
 class Point {
-    constructor(x, y) {
+    x: number;
+    y: number;
+
+    constructor(x: number, y: number) {
         this.x = x;
         this.y = y;
     }
 
-    equals(point) {
+    equals(point: Point) {
         return this.x === point.x && this.y === point.y;
     }
 
-    draw(ctx, { size = 18, color = 'black', outline = false, fill = false } = {}) {
+    draw(ctx: CanvasRenderingContext2D, { size = 18, color = 'black', outline = false, fill = false } = {}) {
         const rad = size / 2;
         ctx.beginPath();
         ctx.arc(this.x, this.y, rad, 0, 2 * Math.PI);
@@ -30,7 +33,7 @@ class Point {
         }
     }
 
-    distance(p) {
-        return Math.hypot(this.x - p.x, this.y - p.y);
+    distance(point: Point) {
+        return Math.hypot(this.x - point.x, this.y - point.y);
     }
 }

@@ -1,10 +1,13 @@
 class Graph {
+    points: Point[] = [];
+    segments: Segment[] = [];
+
     constructor(points = [], segments = []) {
         this.points = points;
         this.segments = segments;
     }
 
-    tryAddPoint(point) {
+    tryAddPoint(point: Point) {
         if (this.containsPoint(point)) {
             return false;
         }
@@ -13,21 +16,21 @@ class Graph {
         return true;
     }
 
-    addPoint(point) {
+    addPoint(point: Point) {
         this.points.push(point);
     }
 
-    addSegment(segment) {
+    addSegment(segment: Segment) {
         this.segments.push(segment);
     }
 
-    containsSegment(segment) {
+    containsSegment(segment: Segment) {
         return this.segments.some((s) => {
             return s.equals(segment);
         });
     }
 
-    tryAddSegment(segment) {
+    tryAddSegment(segment: Segment) {
         if (this.containsSegment(segment) || segment.p1.equals(segment.p2)) {
             return false;
         }
@@ -36,7 +39,7 @@ class Graph {
         return true;
     }
 
-    tryRemoveSegment(segment) {
+    tryRemoveSegment(segment: Segment) {
         if (!this.containsSegment(segment)) {
             return false;
         }
@@ -45,7 +48,7 @@ class Graph {
         return true;
     }
 
-    removeSegment(segment) {
+    removeSegment(segment: Segment) {
         const index = this.segments.findIndex((s) => {
             return s.equals(segment);
         });
@@ -53,13 +56,13 @@ class Graph {
         this.segments.splice(index, 1);
     }
 
-    containsPoint(point) {
+    containsPoint(point: Point) {
         return this.points.some((p) => {
             return p.equals(point);
         });
     }
 
-    tryRemovePoint(point) {
+    tryRemovePoint(point: Point) {
         if (!this.containsPoint(point)) {
             return false;
         }
@@ -68,13 +71,13 @@ class Graph {
         return true;
     }
 
-    getSegementsWithPoint(point) {
+    getSegementsWithPoint(point: Point) {
         return this.segments.filter((segment) => {
             return segment.includes(point);
         });
     }
 
-    removePoint(point) {
+    removePoint(point: Point) {
         const segments = this.getSegementsWithPoint(point);
         segments.forEach((segment) => {
             this.removeSegment(segment);
@@ -91,7 +94,7 @@ class Graph {
         this.segments = [];
     }
 
-    draw(ctx) {
+    draw(ctx: CanvasRenderingContext2D) {
         this.segments.forEach((segment) => {
             segment.draw(ctx);
         });

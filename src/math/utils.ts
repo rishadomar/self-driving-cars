@@ -1,4 +1,4 @@
-function getNearestPoint(point, points, threshold = Infinity) {
+function getNearestPoint(point: Point, points: Point[], threshold = Infinity) {
     let nearest = null;
     let minDistance = Infinity;
 
