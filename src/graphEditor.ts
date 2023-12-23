@@ -36,15 +36,7 @@ class GraphEditor {
         });
 
         this.canvas.addEventListener('mousemove', (e) => {
-            const x = e.offsetX;
-            const y = e.offsetY;
-            this.mouse = new Point(x, y);
-
-            this.hovered = getNearestPoint(this.mouse, this.graph.points, 10);
-            if (this.dragging && this.selected) {
-                this.selected.x = x;
-                this.selected.y = y;
-            }
+            this.handleMouseMove(e);
         });
     }
 
@@ -72,6 +64,18 @@ class GraphEditor {
                 this.handleSelect(this.mouse);
                 this.hovered = this.mouse;
             }
+        }
+    }
+
+    handleMouseMove(e: MouseEvent) {
+        const x = e.offsetX;
+        const y = e.offsetY;
+        this.mouse = new Point(x, y);
+
+        this.hovered = getNearestPoint(this.mouse, this.graph.points, 10);
+        if (this.dragging && this.selected) {
+            this.selected.x = x;
+            this.selected.y = y;
         }
     }
 
