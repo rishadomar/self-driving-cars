@@ -26,12 +26,16 @@ class Viewport {
         this.addEventListeners();
     }
 
-    getMouse(e: MouseEvent) {
-        return new Point(e.offsetX * this.zoom, e.offsetY * this.zoom);
+    getMouse(e: MouseEvent, subtractDragOffset = false) {
+        const p = new Point(
+            (e.offsetX - this.center.x) * this.zoom - this.offset.x,
+            (e.offsetY - this.center.y) * this.zoom - this.offset.y
+        );
+        return subtractDragOffset ? subtract(p, this.drag.offset) : p;
     }
 
     getOffset() {
-        return this.add(this.offset, this.drag.offset);
+        return add(this.offset, this.drag.offset);
     }
 
     addEventListeners() {
@@ -78,14 +82,6 @@ class Viewport {
             this.drag.end = mouse;
             this.drag.offset = subtract(this.drag.end, this.drag.start);
         }
-    }
-
-    subtract(p1: Point, p2: Point) {
-        return new Point(p1.x - p2.x, p1.y - p2.y);
-    }
-
-    add(p1: Point, p2: Point) {
-        return new Point(p1.x + p2.x, p1.y + p2.y);
     }
 
     handleWheel(e: WheelEvent) {
