@@ -1,10 +1,23 @@
 class Graph {
-    points: Point[] = [];
-    segments: Segment[] = [];
+    points: Point[];
+    segments: Segment[];
 
-    constructor(points = [], segments = []) {
+    constructor(points: Point[], segments: Segment[]) {
         this.points = points;
         this.segments = segments;
+    }
+
+    static load(json: any) {
+        const points = json.points.map((p: any) => {
+            return new Point(p.x, p.y);
+        });
+        const segments = json.segments.map((s: any) => {
+            return new Segment(
+                points.find((p: Point) => p.equals(s.p1)),
+                points.find((p: Point) => p.equals(s.p2))
+            );
+        });
+        return new Graph(points, segments);
     }
 
     tryAddPoint(point: Point) {
